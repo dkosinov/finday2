@@ -1,0 +1,18 @@
+.window {
+    width: 100em;
+    height: 100em;
+}
+
+.docs-container {
+    width: auto;
+    height: auto;
+    padding: 50px;
+    border: black 1px dashed;
+    display: flex;
+    flex-direction: row;
+}
+.doc-box {
+    border: black 1px dashed;
+    padding: 10px;
+    margin: 10px;
+}

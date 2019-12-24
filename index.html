@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>FinDay 2.0</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div id="app" class="window"
+     @dragover.stop.prevent
+     @drop.stop.prevent>
+    <bills-comp ref="bills"></bills-comp>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script defer src="js/billsComp.js"></script>
+<script defer src="js/main.js"></script>
 </body>
 </html>
