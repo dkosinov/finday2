@@ -10,22 +10,40 @@ Vue.component('partners', {
                 comment: 'Есть неоплаченные счета за ноябрь 2019',
                 everyDayPayment: true,
                 bills: [{
+                    id: 1,
                     sum: 100251.23,
-                    deadline: '2019-11-15',
-                    payments: [{date:'2019-11-15', sum:50000}],
-                    calendarPlan: [{date:'2019-11-15', sum:50251.23}]
+                    debt: 45251.23,
+                    payments: [
+                        {content: 'Получен счёт', type:'primary ', date:'2019-11-01', sum:100251.23},
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
+                        {content: 'Подано исковое заявление', type:'info', date:'2019-12-10', sum:50251.23},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
+                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
+                        {content: 'Обязательный платёж', type:'danger', date:'2020-01-10', sum:50000}
+                    ],
                 }, {
-                    sum: 500000,
-                    deadline: '2019-12-15',
-                    payments: [{date:'2019-12-15', sum:100000},
-                                {date:'2019-12-20', sum:100000},
-                                    {date:'2019-12-15', sum:100000}],
-                    calendarPlan: [{date:'2019-12-15', sum:200000}]
+                    id: 2,
+                    sum: 100251.23,
+                    debt: 45251.23,
+                    payments: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
+                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
+                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
+                    ],
                 }, {
-                    sum: 500000,
-                    deadline: '2020-01-15',
-                    payments: [],
-                    calendarPlan: []
+                    id: 3,
+                    sum: 100251.23,
+                    debt: 45251.23,
+                    payments: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
+                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
+                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
+                    ],
                 }]
             }, {
                 id: '5036010996',
@@ -36,22 +54,35 @@ Vue.component('partners', {
                 comment: 'Есть требование срок оплаты до 25.01.2020',
                 everyDayPayment: true,
                 bills: [{
+                    id: 1,
                     sum: 100251.23,
-                    deadline: '2019-11-15',
-                    payments: [{date:'2019-11-15', sum:50000}],
-                    calendarPlan: [{date:'2019-11-15', sum:50251.23}]
+                    debt: 45251.23,
+                    payments: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
+                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
+                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
+                    ],
                 }, {
-                    sum: 500000,
-                    deadline: '2019-12-15',
-                    payments: [{date:'2019-12-15', sum:100000},
-                        {date:'2019-12-20', sum:100000},
-                        {date:'2019-12-15', sum:100000}],
-                    calendarPlan: [{date:'2019-12-15', sum:200000}]
+                    id: 2,
+                    sum: 100251.23,
+                    debt: 45251.23,
+                    payments: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
+                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
+                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
+                    ],
                 }, {
-                    sum: 500000,
-                    deadline: '2020-01-15',
-                    payments: [],
-                    calendarPlan: []
+                    id: 3,
+                    sum: 100251.23,
+                    debt: 45251.23,
+                    payments: [
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
+                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
+                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
+                    ],
                 }]
             }, {
                 id: '5896010996',
@@ -62,10 +93,29 @@ Vue.component('partners', {
                 comment: 'Не платить, есть проблемы с товаром',
                 everyDayPayment: false,
                 bills: [{
+                    id: 1,
                     sum: 100251.23,
-                    deadline: '2019-11-15',
-                    payments: [{date:'2019-11-15', sum:50000}],
-                    calendarPlan: [{date:'2019-11-15', sum:50251.23}]
+                    debt: 45251.23,
+                    payments: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
+                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
+                    ],
+                }, {
+                    id: 2,
+                    sum: 100251.23,
+                    debt: 45251.23,
+                    payments: [],
+                }, {
+                    id: 3,
+                    sum: 100251.23,
+                    debt: 45251.23,
+                    payments: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
+                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
+                    ],
                 }]
             }, {
                 id: '5898880996',
@@ -96,6 +146,43 @@ Vue.component('partners', {
                 <el-table
                     :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                     style="width: 100%">
+                    <el-table-column type="expand">
+                      <template slot-scope="props">
+                        <h4>{{ props.row.comment }}</h4>
+                        <h2>{{ props.row.name }}</h2>
+                        <el-table
+                          :data="props.row.bills"
+                          style="width: 100%">
+                          <el-table-column type="expand">
+                            <template slot-scope="props">
+                                <div class="block">
+                                    <el-timeline>
+                                      <el-timeline-item
+                                        v-for="(activity, index) in props.row.payments"
+                                        :key="index"
+                                        :type="activity.type"
+                                        :timestamp="activity.date">
+                                        {{activity.content}} сумма: {{activity.sum}}
+                                      </el-timeline-item>
+                                    </el-timeline>
+                                  </div>
+                            </template>
+                          </el-table-column>
+                          <el-table-column
+                            label="Номер счёта"
+                            prop="id">
+                          </el-table-column>
+                          <el-table-column
+                            label="Сумма к оплате"
+                            prop="sum">
+                          </el-table-column>
+                          <el-table-column
+                            label="Долг по счёту"
+                            prop="debt">
+                          </el-table-column>
+                        </el-table>
+                      </template>
+                    </el-table-column>
                     <el-table-column
                       label="ИНН"
                       prop="id"
@@ -146,7 +233,7 @@ Vue.component('partners', {
                         <el-button
                           size="mini"
                           type="primary"
-                          @click="handlePayment(scope.$index, scope.row)">Детали</el-button>
+                          @click="handlePayment(scope.$index, scope.row)">Изменить</el-button>
                         <el-button
                           size="mini"
                           type="success"
@@ -180,7 +267,7 @@ Vue.component('partner', {
                   <el-tab-pane label="Инфо">
                     <div style="padding: 20px">
                       <el-form ref="partnerData" :model="partnerData">
-                        <el-form-item label="ИНН" :label-width="formLabelWidth">
+                        <el-form-item label="ИНН"">
                         <el-input v-model="partnerData.id" autocomplete="off"></el-input>
                         </el-form-item>
                         <el-form-item label="Наименование">
