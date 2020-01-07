@@ -1,4 +1,4 @@
-Vue.component('partners', {
+Vue.component('partnersComp', {
     data() {
         return {
             tableData: [{
@@ -13,7 +13,7 @@ Vue.component('partners', {
                     id: 1,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [
+                    events: [
                         {content: 'Получен счёт', type:'primary ', date:'2019-11-01', sum:100251.23},
                         {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
@@ -26,7 +26,7 @@ Vue.component('partners', {
                     id: 2,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [
+                    events: [
                         {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
@@ -37,7 +37,7 @@ Vue.component('partners', {
                     id: 3,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [
+                    events: [
                         {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
@@ -57,7 +57,7 @@ Vue.component('partners', {
                     id: 1,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [
+                    events: [
                         {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
@@ -68,7 +68,7 @@ Vue.component('partners', {
                     id: 2,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [
+                    events: [
                         {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
                         {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
                         {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
@@ -77,7 +77,7 @@ Vue.component('partners', {
                     id: 3,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [
+                    events: [
                         {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
                         {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
@@ -96,7 +96,7 @@ Vue.component('partners', {
                     id: 1,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [
+                    events: [
                         {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
                         {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
@@ -105,12 +105,12 @@ Vue.component('partners', {
                     id: 2,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [],
+                    events: [],
                 }, {
                     id: 3,
                     sum: 100251.23,
                     debt: 45251.23,
-                    payments: [
+                    events: [
                         {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
                         {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
@@ -128,8 +128,8 @@ Vue.component('partners', {
                 bills: []
             }],
             search: '',
-            isPartnerDataVisible: false,
-
+            isPartnerFormVisible: false,
+            isBillFormVisible: false,
         }
     },
     methods: {
@@ -137,9 +137,14 @@ Vue.component('partners', {
             console.log(index, row);
         },
         handlePayment(index, row) {
-            this.isPartnerDataVisible = true;
             this.$refs.partner.partnerData = row;
+            this.isPartnerFormVisible = true;
             console.log(index, row);
+        },
+        handleBillAdd(partnerData){
+            console.log(partnerData);
+            this.$refs.bill.bills = partnerData.bills;
+            this.isBillFormVisible = true;
         }
     },
     template: `<div>
@@ -147,41 +152,22 @@ Vue.component('partners', {
                     :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                     style="width: 100%">
                     <el-table-column type="expand">
-                      <template slot-scope="props">
-                        <h4>{{ props.row.comment }}</h4>
-                        <h2>{{ props.row.name }}</h2>
-                        <el-table
-                          :data="props.row.bills"
-                          style="width: 100%">
-                          <el-table-column type="expand">
-                            <template slot-scope="props">
-                                <div class="block">
-                                    <el-timeline>
-                                      <el-timeline-item
-                                        v-for="(activity, index) in props.row.payments"
-                                        :key="index"
-                                        :type="activity.type"
-                                        :timestamp="activity.date">
-                                        {{activity.content}} сумма: {{activity.sum}}
-                                      </el-timeline-item>
-                                    </el-timeline>
-                                  </div>
-                            </template>
-                          </el-table-column>
-                          <el-table-column
-                            label="Номер счёта"
-                            prop="id">
-                          </el-table-column>
-                          <el-table-column
-                            label="Сумма к оплате"
-                            prop="sum">
-                          </el-table-column>
-                          <el-table-column
-                            label="Долг по счёту"
-                            prop="debt">
-                          </el-table-column>
-                        </el-table>
-                      </template>
+                        <template slot-scope="props">
+                            <h4>{{ props.row.comment }}</h4>
+                            <h2>{{ props.row.name }}</h2>
+                            <div class="container-flex-row">
+                                <h1>Счета к оплате</h1>
+                                <el-button
+                                    size="medium"
+                                    type="primary"
+                                    @click="handleBillAdd(props.row)">
+                                    Добавить счёт
+                                </el-button>
+                            </div>
+                            <el-partner-bills
+                                :partner-data="props.row">
+                            </el-partner-bills>
+                        </template>
                     </el-table-column>
                     <el-table-column
                       label="ИНН"
@@ -192,17 +178,17 @@ Vue.component('partners', {
                       label="Наименование"
                       prop="name"
                       show-overflow-tooltip
-                      min-width="50">
+                      width="200">
                     </el-table-column>
+<!--                    <el-table-column-->
+<!--                      label="Счетов к оплате"-->
+<!--                      header-align="center"-->
+<!--                      prop="billsToPayNumber"-->
+<!--                      width="85"-->
+<!--                      align="right">-->
+<!--                    </el-table-column>-->
                     <el-table-column
-                      label="Счетов к оплате"
-                      header-align="center"
-                      prop="billsToPayNumber"
-                      width="85"
-                      align="right">
-                    </el-table-column>
-                    <el-table-column
-                      label="Сумма к оплате"
+                      label="Сумма долга"
                       prop="billsToPaySum"
                       header-align="center"
                       width="150"
@@ -218,7 +204,7 @@ Vue.component('partners', {
                     <el-table-column
                       label="Комментарий"
                       prop="comment"
-                      width="200"
+                      width="100"
                       show-overflow-tooltip>
                     </el-table-column>
                     <el-table-column
@@ -231,21 +217,22 @@ Vue.component('partners', {
                       </template>
                       <template slot-scope="scope">
                         <el-button
-                          size="mini"
+                          size="medium"
                           type="primary"
                           @click="handlePayment(scope.$index, scope.row)">Изменить</el-button>
                         <el-button
-                          size="mini"
+                          size="medium"
                           type="success"
                           @click="handlePayAllBills(scope.$index, scope.row)">Оплатить</el-button>
                       </template>
                     </el-table-column>
                 </el-table>
-                <partner ref="partner"></partner>
+                <el-partner-form ref="partner"></el-partner-form>
+                <el-bill-form ref="bill"></el-bill-form>
             </div>`
 });
 
-Vue.component('partner', {
+Vue.component('elPartnerForm', {
     data() {
         return {
             partnerData: {},
@@ -261,7 +248,7 @@ Vue.component('partner', {
         }
     },
     template: `<el-drawer
-              :visible.sync="$parent.isPartnerDataVisible"
+              :visible.sync="$parent.isPartnerFormVisible"
               size="50%">
                 <el-tabs type="card" @tab-click="handleTabClick">
                   <el-tab-pane label="Инфо">
@@ -291,10 +278,124 @@ Vue.component('partner', {
             </el-drawer>`
 });
 
+Vue.component('elPartnerBills',{
+    props: ['partnerData'],
+    data(){
+        return {
 
-// <div class="demo-drawer__content">
+        }
+    },
+    template: `<div>
+                 <el-table
+                   :data="partnerData.bills"
+                   style="width: 100%">
+                   <el-table-column type="expand">
+                     <template slot-scope="props">
+                        <el-bill-events
+                            :bill-data="props.row">
+                        </el-bill-events>
+                     </template>
+                   </el-table-column>
+                   <el-table-column
+                     label="Номер счёта"
+                     prop="id">
+                   </el-table-column>
+                   <el-table-column
+                     label="Сумма к оплате"
+                     prop="sum">
+                   </el-table-column>
+                   <el-table-column
+                     label="Долг по счёту"
+                     prop="debt">
+                   </el-table-column>
+                 </el-table>
+                 <div class="dnd-container">
+                    Перетащите сюда файлы со счетами или нажмите для загрузки новых счетов
+                 </div>
+              </div>`
+});
 
-//     </div>
-//     <div class="demo-drawer__footer">
+Vue.component('elBillEvents',{
+    props: ['billData'],
+    template: `<div class="block">
+                   <el-timeline>
+                     <el-timeline-item
+                       v-for="(event, index) in billData.events"
+                       :key="index"
+                       :type="event.type"
+                       :timestamp="event.date">
+                       {{event.content}} сумма: {{event.sum}}
+                     </el-timeline-item>
+                   </el-timeline>
+               </div>`
+});
 
-//     </div>
+Vue.component('elBillForm',{
+    data() {
+        return {
+            bills: [],
+            emptyBillData: {
+                id: 0,
+                sum: 0.00,
+                debt: 0.00,
+                comment: '',
+                events: [
+                    {content: 'Получен счёт', type:'primary ', date:'', sum:0.00},
+                    {content: 'Дедлайн оплаты', type:'warning', date:'', sum:0.00},
+                ],
+            },
+            billData: {
+                id: 0,
+                sum: 0.00,
+                debt: 0.00,
+                comment: '',
+                events: [
+                    {content: 'Получен счёт', type:'primary ', date:'', sum:0.00},
+                    {content: 'Дедлайн оплаты', type:'warning', date:'', sum:0.00},
+                ],
+            },
+        }
+    },
+    // created: function () {
+    //     for (let key in this.emptyBillData) {
+    //         this.billData[key] = this.emptyBillData[key];
+    //     }
+    //     console.log(this.billData);
+    // },
+    methods: {
+        onSubmit() {
+            this.bills.push(this.billData);
+            // this.billData = {};
+            for (let key in this.emptyBillData) {
+                this.billData[key] = this.emptyBillData[key];
+            }
+            console.log('submit!');
+            this.$parent.isBillFormVisible = false;
+        },
+    },
+    template: `<el-drawer
+              :visible.sync="$parent.isBillFormVisible"
+              size="50%">
+                    <div style="padding: 20px">
+                       <el-form ref="billData" :model="billData">
+                            <el-form-item label="Номер"">
+                               <el-input v-model="billData.id" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="Сумма">
+                               <el-input v-model="billData.sum"></el-input>
+                            </el-form-item>
+                            <el-form-item label="Долг">
+                               <el-input v-model="billData.debt"></el-input>
+                            </el-form-item>
+                            <el-form-item label="Комментарий">
+                               <el-input type="textarea" v-model="billData.comment"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                              <el-button type="primary" @click="onSubmit">Сохранить</el-button>
+                              <el-button>Отмена</el-button>
+                            </el-form-item>
+                       </el-form>
+                    </div>
+            </el-drawer>`
+});
+
