@@ -16,9 +16,20 @@ body {
 .container-flex-row {
     display: flex;
     flex-direction: row;
-    width: 400px;
-    align-items: center;
+    /*width: auto;*/
+    align-items: flex-start;
     justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+
+.container-partner-info {
+    background-color: #e9e9eb;
+    padding: 10px;
+}
+
+.text-margin__bottom {
+    margin-bottom: 25px;
 }
 
 /***********************/
