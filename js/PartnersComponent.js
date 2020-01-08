@@ -1,141 +1,33 @@
 Vue.component('partnersComp', {
     data() {
         return {
-            tableData: [{
-                id: '5032292612',
-                name: 'Филиал АО "Мособлгаз" "Подольскмежрайгаз"',
-                billsToPayNumber: 5,
-                billsToPaySum: 1250423.06,
-                lastPayDate: '2019-12-26',
-                comment: 'Есть неоплаченные счета за ноябрь 2019',
-                everyDayPayment: true,
-                bills: [{
-                    id: 1,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [
-                        {content: 'Получен счёт', type:'primary ', date:'2019-11-01', sum:100251.23},
-                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
-                        {content: 'Подано исковое заявление', type:'info', date:'2019-12-10', sum:50251.23},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
-                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
-                        {content: 'Обязательный платёж', type:'danger', date:'2020-01-10', sum:50000}
-                    ],
-                }, {
-                    id: 2,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [
-                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
-                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
-                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
-                    ],
-                }, {
-                    id: 3,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [
-                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
-                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
-                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
-                    ],
-                }]
-            }, {
-                id: '5036010996',
-                name: 'МРИ ФНС России N5 по Московской области',
-                billsToPayNumber: 3,
-                billsToPaySum: 522000.17,
-                lastPayDate: '2019-12-30',
-                comment: 'Есть требование срок оплаты до 25.01.2020',
-                everyDayPayment: true,
-                bills: [{
-                    id: 1,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [
-                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
-                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
-                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
-                    ],
-                }, {
-                    id: 2,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [
-                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
-                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
-                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
-                    ],
-                }, {
-                    id: 3,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
-                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
-                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
-                    ],
-                }]
-            }, {
-                id: '5896010996',
-                name: 'ООО "Колокольчик"',
-                billsToPayNumber: 10,
-                billsToPaySum: 22522000.17,
-                lastPayDate: '2019-05-30',
-                comment: 'Не платить, есть проблемы с товаром',
-                everyDayPayment: false,
-                bills: [{
-                    id: 1,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [
-                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
-                        {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}
-                    ],
-                }, {
-                    id: 2,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [],
-                }, {
-                    id: 3,
-                    sum: 100251.23,
-                    debt: 45251.23,
-                    comment: 'Это комментарий к счёту',
-                    events: [
-                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000},
-                        {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23},
-                        {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},
-                    ],
-                }]
-            }, {
-                id: '5898880996',
-                name: 'ООО "Ромашка"',
-                billsToPayNumber: 3,
-                billsToPaySum: 12000.17,
-                lastPayDate: '2019-04-30',
-                comment: '',
-                everyDayPayment: false,
-                bills: []
-            }],
+            tableData: [
+                {id: '5032292612', name: 'Филиал АО "Мособлгаз" "Подольскмежрайгаз"', billsToPayNumber: 5, billsToPaySum: 1250423.06, lastPayDate: '2019-12-26', comment: 'Есть неоплаченные счета за ноябрь 2019', everyDayPayment: true, bills: [{
+                    id: 1, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
+                        {content: 'Получен счёт', type:'primary ', date:'2019-11-01', sum:100251.23}, {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000}, {content: 'Подано исковое заявление', type:'info', date:'2019-12-10', sum:50251.23}, {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23}, {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000}, {content: 'Обязательный платёж', type:'danger', date:'2020-01-10', sum:50000}],}, {
+                    id: 2, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23}, {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000}, {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}],}, {
+                    id: 3, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23}, {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000}, {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}],}]
+                },
+                {id: '5036010996', name: 'МРИ ФНС России N5 по Московской области', billsToPayNumber: 3, billsToPaySum: 522000.17, lastPayDate: '2019-12-30', comment: 'Есть требование срок оплаты до 25.01.2020', everyDayPayment: true, bills: [{
+                    id: 1, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23}, {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000}, {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}],}, {
+                    id: 2, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000}, {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000}, {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}],}, {
+                    id: 3, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
+                        {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23}, {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000}, {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}],}]
+                },
+                {id: '5896010996', name: 'ООО "Колокольчик"', billsToPayNumber: 10, billsToPaySum: 22522000.17, lastPayDate: '2019-05-30', comment: 'Не платить, есть проблемы с товаром', everyDayPayment: false, bills: [{
+                    id: 1, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000}, {content: 'Обязательный платёж', type:'danger', date:'2020-1-10', sum:50000}],}, {
+                    id: 2, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [],}, {
+                    id: 3, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
+                        {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23}, {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000},],}]
+                },
+                {id: '5898880996', name: 'ООО "Ромашка"', billsToPayNumber: 3, billsToPaySum: 12000.17, lastPayDate: '2019-04-30', comment: '', everyDayPayment: false, bills: []
+                }
+            ],
             search: '',
             isPartnerFormVisible: false,
         }
@@ -151,6 +43,12 @@ Vue.component('partnersComp', {
         },
     },
     template: `<div>
+                <div
+                    v-for="(partner, index) in tableData">
+                    <el-partner
+                        :partner="partner"></el-partner>
+                </div>
+
                 <el-table
                     :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                     style="width: 100%">
@@ -218,6 +116,16 @@ Vue.component('partnersComp', {
                 </el-table>
                 <el-partner-form ref="partner"></el-partner-form>
             </div>`
+});
+
+Vue.component('elPartner', {
+   props: ['partner'],
+   template: `<div>
+                <el-badge
+                   :value="partner.billsToPaySum" class="item">
+                    <el-button>{{partner.name}}</el-button>
+                </el-badge>
+              </div>`
 });
 
 Vue.component('elPartnerForm', {
