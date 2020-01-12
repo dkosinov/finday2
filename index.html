@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 </head>
 <body>
@@ -14,14 +16,28 @@
      @drop.stop.prevent>
 
     <el-container>
-        <el-header>Header</el-header>
-        <el-main>
-            <partners-comp></partners-comp>
-        </el-main>
+        <el-header style="text-align: right; font-size: 12px">
+            <div class="container-flex-row">
+<!--                <span>Привет</span>-->
+<!--                <el-input-->
+<!--                        v-model="$refs.search"-->
+<!--                        size="mini"-->
+<!--                        placeholder="Введите для поиска по наименованию"/>-->
+            </div>
+        </el-header>
+<!--        <el-main>-->
+<!--            <div class="container-flex-row flex-wrap">-->
+<!--                <partners-comp ref="partners"></partners-comp>-->
+<!--            </div>-->
+<!--        </el-main>-->
+        <main>
+            <partners-comp ref="partners"></partners-comp>
+        </main>
         <el-footer>Footer</el-footer>
         <error ref="error"></error>
     </el-container>
 </div>
+<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!--<script src="https://unpkg.com/vue"></script>-->
 <!--<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
@@ -34,6 +50,7 @@
     // Vue.locale('ru-ru', ELEMENT.lang.ruRU)
     ELEMENT.locale(ELEMENT.lang.en)
 </script>
+<script src="js/UploadDndComp.js"></script>
 <script src="js/PartnersComponent.js"></script>
 <!--<script src="js/FilterComp.js"></script>-->
 <script src="js/ErrorComp.js"></script>
