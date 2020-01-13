@@ -4,6 +4,42 @@ body {
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
+.header-container {
+    display: flex;
+    background-color: antiquewhite;
+    justify-content: space-between;
+    align-items: center;
+    color: #fafafa;
+    padding: 15px 50px;
+}
+.logo {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    text-decoration: none;
+}
+.logo:hover {
+    cursor: pointer;
+}
+
+.logo__text_1 {
+    color: #f35409;
+}
+.logo__text_2 {
+    color: #54fd01;
+}
+.logo__text_3 {
+    color: #007dfd;
+}
+
+.upload__icon {
+    color: #d9d9d9;
+}
+.upload__icon:hover {
+    color: cornflowerblue;
+    cursor: pointer;
+}
+
 .partner-container {
     margin: 15px 50px;
     height: 50px;
@@ -127,6 +163,7 @@ body {
     /*overflow: hidden;*/
     display: flex;
     flex-direction: column;
+    margin: 0 auto;;
 }
 .upload-dragger-block:hover {
     border: cornflowerblue dashed 2px;
@@ -136,7 +173,7 @@ body {
 .upload-dragger-block:hover .upload__icon {
     color: cornflowerblue;
 }
-.upload__icon {
+.upload-block__icon {
     width: 50px;
     height: 30px;
     color: #d9d9d9;

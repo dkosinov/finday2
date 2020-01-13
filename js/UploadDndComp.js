@@ -52,17 +52,29 @@ Vue.component('uploadDndComp', {
         onUpload(){
             console.log('handleUpload')
         },
+        // handleClose(done) {
+        //     // this.$confirm('Are you sure you want to close this?')
+        //     //     .then(_ => {
+        //     //         done();
+        //     //     })
+        //     //     .catch(_ => {});
+        // }
     },
-    template: `<div class="upload-dragger-block"
+    template: `<el-drawer
+                :visible.sync="$parent.isUploadFormShow"
+                direction="ltr"
+                size="50%">
+                <div class="upload-dragger-block"
                     @dragover.stop.prevent="onOver"
                     @drop.stop.prevent="onBillFileDrop">
-                       <div class="upload__icon"><i class="fas fa-cloud-upload-alt fa-3x"></i></div>
-                       <div class="upload__text">перетащите сюда файлы с документами
+                       <div class="upload-block__icon"><i class="fas fa-cloud-upload-alt fa-3x"></i></div>
+                       <div class="upload__text">перетащите сюда документы на оплату
                            <div class="upload__text_clickable"
                                @click="onUpload">
                                <em>или нажмите для загрузки</em>
                             </div>
                        </div>
                        <div class="upload__tip">допускаются к загрузке фалы картинок и pdf-файлы</div>
-               </div>`
+               </div>
+        </el-drawer>`
 });

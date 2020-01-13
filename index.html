@@ -15,27 +15,16 @@
      @dragover.stop.prevent
      @drop.stop.prevent>
 
-    <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-            <div class="container-flex-row">
-<!--                <span>Привет</span>-->
-<!--                <el-input-->
-<!--                        v-model="$refs.search"-->
-<!--                        size="mini"-->
-<!--                        placeholder="Введите для поиска по наименованию"/>-->
-            </div>
-        </el-header>
+    <header-comp ref="header"></header-comp>
 <!--        <el-main>-->
 <!--            <div class="container-flex-row flex-wrap">-->
 <!--                <partners-comp ref="partners"></partners-comp>-->
 <!--            </div>-->
 <!--        </el-main>-->
-        <main>
-            <partners-comp ref="partners"></partners-comp>
-        </main>
-        <el-footer>Footer</el-footer>
-        <error ref="error"></error>
-    </el-container>
+    <main>
+        <partners-comp ref="partners"></partners-comp>
+    </main>
+    <error ref="error"></error>
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -50,11 +39,12 @@
     // Vue.locale('ru-ru', ELEMENT.lang.ruRU)
     ELEMENT.locale(ELEMENT.lang.en)
 </script>
-<script src="js/UploadDndComp.js"></script>
 <script src="js/PartnersComponent.js"></script>
+<script src="js/UploadDndComp.js"></script>
 <!--<script src="js/FilterComp.js"></script>-->
 <script src="js/ErrorComp.js"></script>
 <!--<script src="js/CartComp.js"></script>-->
+<script defer src="js/HeaderComp.js"></script>
 <script defer src="js/main.js"></script>
 </body>
 </html>

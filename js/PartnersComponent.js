@@ -1,8 +1,8 @@
 Vue.component('partnersComp', {
     data() {
         return {
-            // partnersData: [],
-            partnersData: [
+            partnersData: [],
+            partnersDataTemp: [
                 {id: '5032292612', name: 'Филиал АО "Мособлгаз" "Подольскмежрайгаз"', billsToPayNumber: 5, billsToPaySum: 1250423.06, lastPayDate: '2019-12-26', comment: 'Есть неоплаченные счета за ноябрь 2019', everyDayPayment: true, bills: [{
                     id: 1, sum: 100251.23, debt: 45251.23, comment: 'Это комментарий к счёту', events: [
                         {content: 'Получен счёт', type:'primary ', date:'2019-11-01', sum:100251.23}, {content: 'Оплата', type:'success', date:'2019-11-15', sum:50000}, {content: 'Дедлайн', type:'warning', date:'2019-11-15', sum:50000}, {content: 'Подано исковое заявление', type:'info', date:'2019-12-10', sum:50251.23}, {content: 'Дедлайн', type:'warning', date:'2019-11-30', sum:50251.23}, {content: 'Оплата', type:'success', date:'2019-11-10', sum:5000}, {content: 'Обязательный платёж', type:'danger', date:'2020-01-10', sum:50000}],}, {
@@ -144,24 +144,14 @@ Vue.component('partnersComp', {
         }
     },
     template: `<div class="partners-container">
-<!--                <el-partner-->
-<!--                    v-if="isNewPartnerFormVisible"-->
-<!--                    :partner="{}"></v-showel-partner>                -->
-                <div v-if="!partnersData.length" 
-                    class="partners-start-container">
-                    <upload-dnd-comp
-                        :partnersData="partnersData"></upload-dnd-comp>          
-                </div>
-                <div v-else>
                     <div v-for="(partner, index) in partnersData">
-                        <el-partner
-                            :partner="partner"></el-partner>
+                        <partner-el
+                            :partner="partner"></partner-el>
                     </div>
-                </div>
             </div>`
 });
 
-Vue.component('elPartner', {
+Vue.component('PartnerEl', {
    props: ['partner'],
     data(){
        return {
@@ -407,23 +397,23 @@ Vue.component('billFormEl',{
     },
 
     methods: {
-        // onSubmit() {
-        //     let newBill = Object.assign({},this.newBill);
-        //     // newBill.events[0].date = new Date();
-        //     newBill.events[0].date = this.$root.getEventData(new Date());
-        //     newBill.events[0].sum = newBill.sum;
-        //     newBill.events[1].date = this.$root.getEventData(newBill.events[1].date);
-        //     // newBill.events[1].date.toString(newBill.events[1].date);
-        //     newBill.events[1].sum = newBill.sum;
-        //     console.log(newBill);
-        //     this.bills.push(newBill);
-        //     // this.newBill = {};
-        //     for (let key in this.emptyBill) {
-        //         this.newBill[key] = this.emptyBill[key];
-        //     }
-        //     console.log('submit!');
-        //     this.$parent.isBillFormVisible = false;
-        // },
+        onSubmit() {
+            let newBill = Object.assign({},this.newBill);
+            // newBill.events[0].date = new Date();
+            newBill.events[0].date = this.$root.getEventData(new Date());
+            newBill.events[0].sum = newBill.sum;
+            newBill.events[1].date = this.$root.getEventData(newBill.events[1].date);
+            // newBill.events[1].date.toString(newBill.events[1].date);
+            newBill.events[1].sum = newBill.sum;
+            console.log(newBill);
+            this.bills.push(newBill);
+            // this.newBill = {};
+            for (let key in this.emptyBill) {
+                this.newBill[key] = this.emptyBill[key];
+            }
+            console.log('submit!');
+            this.$parent.isBillFormVisible = false;
+        },
         handleClose(done) {
             if (this.loading) {
                 return;
@@ -432,6 +422,7 @@ Vue.component('billFormEl',{
                 .then(_ => {
                     this.loading = true;
                     this.timer = setTimeout(() => {
+                        this.onSubmit();
                         done();
                         // animation takes time
                         setTimeout(() => {
