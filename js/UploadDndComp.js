@@ -1,30 +1,45 @@
 Vue.component('uploadDndComp', {
     props: ['partnersData'],
+    data(){
+        return {
+            newPartner: null,
+            // isPartnerFormVisible: false,
+        }
+    },
     methods: {
         onOver(evnt){
             evnt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
         },
         addNewPartner(file){
-            this.partnersData.push({
+            let newPartner = {
                 id: '000000000000',
-                name: 'Создан новый контрагент',
+                name1: 'Новый контрагент',
+                name2: 'Создан новый контрагент',
                 style: {type: 'info', size: 'small', text: 'Добавьте информацию'},
-                billsToPayNumber: 0,
-                billsToPaySum: 0,
-                lastPayDate: '',
                 comment: '',
                 everyDayPayment: false,
-                bills: [{
-                    id: '000000',
-                    sum: 10000,
-                    debt: 0.00,
-                    comment: '',
-                    events: [
-                        {content: 'Получен счёт', type:'primary ', state: 'start', date:'', sum:0.00},
-                        {content: 'Дедлайн оплаты', type:'warning', state: 'deadline', date:'', sum:0.00},
-                    ],
-                }]
-            });
+                everyDaySum: 0,
+                rating: 0,
+                bills: [
+                    {id: 1,
+                        comment: 'Это комментарий к счёту',
+                        events:
+                            [
+                                {id: 1, name: 'start', content: 'Получен счёт', type:'primary', date:'2019-11-01', sum:1500000},
+                                {id: 1, name: 'deadline', content: 'Дедлайн оплаты', type:'warning', date:'2019-11-15', sum:1000000},
+                            ],
+                    },
+                ]
+            };
+            this.partnersData.push(newPartner);
+            this.$root.notifySuccessMessage(`Cоздан новый контрагент.`);
+            this.$root.notifySuccessMessage(`Создан документ на оплату.`);
+            console.log(this.newPartner);
+            this.newPartner = newPartner;
+            console.log(this.newPartner);
+            this.$parent.isUploadFormShow = false;
+            // this.isPartnerFormVisible = true;
+
         },
         onBillFileDrop(evnt){
             // Check for the various File API support.
@@ -76,5 +91,10 @@ Vue.component('uploadDndComp', {
                        </div>
                        <div class="upload__tip">допускаются к загрузке фалы картинок и pdf-файлы</div>
                </div>
+<!--               <partner-form-el-->
+<!--                   v-if="isPartnerFormVisible"-->
+<!--                   ref="partner"-->
+<!--                   :partner="newPartner">-->
+<!--               </partner-form-el>-->
         </el-drawer>`
 });

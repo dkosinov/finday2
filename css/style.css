@@ -41,10 +41,9 @@ body {
 }
 
 .partner-container {
-    margin: 15px 50px;
-    height: 50px;
-    /*display: flex;*/
-    /*flex-direction: row;*/
+    margin: 10px;
+    height: fit-content;
+    width: fit-content;
 }
 
 .partner-block {
@@ -79,13 +78,36 @@ body {
     visibility: hidden;
 }
 
+.product-mini__stars {
+    /*margin-top: 16px;*/
+}
+.stars {
+    display: flex;
+}
+.stars__star {
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.stars__star_active {
+    color: #e4af48;
+}
+
 .partner__bills-block {
     display: flex;
     flex-direction: row;
-    position: relative;
-    top: -50px;
-    right: -147px;
+    /*position: relative;*/
+    /*top: -50px;*/
+    /*right: -147px;*/
     width: fit-content;
+
+}
+
+.partner__tips-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 175px;
 }
 
 .bill-info-container, .bills-block__tag {
@@ -216,7 +238,7 @@ body {
 }
 
 .partner-info-container {
-    padding: 20px;
+    padding: 0 20px;
 }
 
 .text-margin__bottom {
