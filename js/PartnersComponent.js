@@ -16,8 +16,7 @@ Vue.component('partnersComp', {
                             comment: 'Это комментарий к счёту',
                             events:
                                 [
-                                    // {id: 1, name: 'start', content: 'Получен счёт', type:'primary', date:'2019-11-01', sum:1000000},
-                                    // {id: 1, name: 'start', content: 'Получен счёт', type:'primary', date:'2019-11-01', sum:1500000},
+                                    {id: 1, name: 'start', content: 'Получен счёт', type:'primary', date:'2019-11-01', sum:1500000},
                                     {id: 1, name: 'deadline', content: 'Дедлайн оплаты', type:'warning', date:'2019-11-15', sum:1000000},
                                     {id: 1, name: 'payment', content: 'Оплата', type:'success', date:'2019-11-15', sum:500000},
                                     {id: 1, name: 'user', content: 'Котрагентом подано исковое заявление', type:'info', date:'2019-12-15', sum:500000},
@@ -44,7 +43,6 @@ Vue.component('partnersComp', {
                             events:
                                 [
                                     {id: 1, name: 'start', content: 'Получен счёт', type:'primary', date:'2019-11-01', sum:1000000},
-                                    {id: 1, name: 'start', content: 'Получен счёт', type:'primary', date:'2019-11-01', sum:1500000},
                                     {id: 1, name: 'deadline', content: 'Дедлайн оплаты', type:'warning', date:'2019-11-15', sum:1000000},
                                     {id: 1, name: 'payment', content: 'Оплата', type:'success', date:'2019-11-15', sum:500000},
                                     {id: 1, name: 'user', content: 'Котрагентом подано исковое заявление', type:'info', date:'2019-12-15', sum:500000},
@@ -53,7 +51,6 @@ Vue.component('partnersComp', {
                                     {id: 1, name: 'user', content: 'Обязательный платёж по договорённости', type:'danger', date:'2020-01-10', sum:100000},
                                     {id: 1, name: 'payment', content: 'Оплата', type:'success', date:'2020-01-10', sum:100000},
                                     {id: 1, name: 'payment', content: 'Оплата', type:'success', date:'2020-01-15', sum:500000},
-                                    {id: 1, name: 'paid', content: 'Счёт полностью оплачен', type:'primary', date:'2020-01-15', sum:1000000}
                                 ],
                         },
                         {id: 2,
@@ -68,7 +65,7 @@ Vue.component('partnersComp', {
                                     {id: 1, name: 'payment', content: 'Оплата', type:'success', date:'2019-12-29', sum:100000},
                                     {id: 1, name: 'user', content: 'Обязательный платёж по договорённости', type:'danger', date:'2020-01-10', sum:100000},
                                     {id: 1, name: 'payment', content: 'Оплата', type:'success', date:'2020-01-10', sum:100000},
-                                    {id: 1, name: 'payment', content: 'Оплата', type:'success', date:'2020-01-15', sum:500000},
+                                    {id: 1, name: 'payment', content: 'Оплата', type:'success', date:'2020-01-15', sum:100000},
                                 ],
                         },                    ]
                 }           ],
@@ -79,6 +76,66 @@ Vue.component('partnersComp', {
         }
     },
     methods: {
+        onOver(evnt){
+            evnt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+        },
+        addNewPartner(file){
+            let newPartner = {
+                id: '000000000000',
+                name1: 'Новый контрагент',
+                name2: 'Создан новый контрагент',
+                style: {type: 'info', size: 'small', text: 'Добавьте информацию'},
+                comment: '',
+                everyDayPayment: false,
+                everyDaySum: 0,
+                rating: 0,
+                bills: [
+                    {id: 1,
+                        comment: 'Это комментарий к счёту',
+                        events:
+                            [
+                                {id: 1, name: 'start', content: 'Получен счёт', type:'primary', date:'2019-11-01', sum:1500000},
+                                {id: 1, name: 'deadline', content: 'Дедлайн оплаты', type:'warning', date:'2019-11-15', sum:1000000},
+                            ],
+                    },
+                ]
+            };
+            this.partnersData.push(newPartner);
+            this.$root.notifySuccessMessage(`Cоздан новый контрагент.`);
+            this.$root.notifySuccessMessage(`Создан документ на оплату.`);
+            console.log(this.newPartner);
+            this.newPartner = newPartner;
+            console.log(this.newPartner);
+            // this.$parent.isUploadFormShow = false;
+            // this.isPartnerFormVisible = true;
+
+        },
+        onBillFileDrop(evnt){
+            // Check for the various File API support.
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                // Great success! All the File APIs are supported.
+                console.log('Great success!');
+                const files = evnt.dataTransfer.files;
+                console.log(files);
+                for (file of files) {
+                    // process image files and pdf.
+                    console.log(file.type);
+                    // process image files and pdf.
+                    if (file.type.match("image/*") || (file.type==='application/pdf')) {
+                        console.log('type Ok');
+                        this.addNewPartner(file);
+                    } else {
+                        this.$root.$refs.error.setText('Недопустимый формат файла!');
+                    }
+                }
+            } else {
+                this.$root.$refs.error.setText('The File APIs are not fully supported in this browser.');
+            }
+            return false;
+        },
+        onUpload(){
+            console.log('handleUpload')
+        },
         handlePayAllBills(index, row) {
             console.log(index, row);
         },
@@ -103,7 +160,9 @@ Vue.component('partnersComp', {
             console.log(file);
         }
     },
-    template: `<div class="partners-container">
+    template: `<div class="partners-container"
+                    @dragover.stop.prevent="onOver"
+                    @drop.stop.prevent="onBillFileDrop">
                     <div v-for="(partner, index) in partnersData">
                         <partner-comp
                             :partner="partner"></partner-comp>

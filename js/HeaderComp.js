@@ -15,17 +15,15 @@ Vue.component('headerComp', {
         },
     },
     template: `<header class="header-container">
-                <a href="#" class="logo">
+                <a href="http://myfinday.online/" class="logo">
                     <span class="logo__text_1">MY</span><span class="logo__text_2">FIN</span><span class="logo__text_3">DAY</span>                    
                 </a>
-                <div class="upload-menu__item"
-                    @click="handlerShowUploadForm"
-                    title="Загрузите документы">
-                    <div class="upload__icon"><i class="fas fa-cloud-upload-alt fa-2x"></i></div>                
-                </div>
-                <upload-dnd-comp
-                   :partnersData="partners">
-                </upload-dnd-comp> 
+<!--                <div class="upload-menu__item"-->
+<!--                    @click="handlerShowUploadForm"-->
+<!--                    title="Загрузите документы">-->
+<!--                    <div class="upload__icon"><i class="fas fa-cloud-upload-alt fa-2x"></i></div>                -->
+<!--                </div>-->
+
 
             </header>`
 });

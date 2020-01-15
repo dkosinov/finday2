@@ -75,26 +75,27 @@ Vue.component('uploadDndComp', {
         //     //     .catch(_ => {});
         // }
     },
-    template: `<el-drawer
-                :visible.sync="$parent.isUploadFormShow"
-                direction="ltr"
-                size="50%">
+    template: `
                 <div class="upload-dragger-block"
                     @dragover.stop.prevent="onOver"
                     @drop.stop.prevent="onBillFileDrop">
-                       <div class="upload-block__icon"><i class="fas fa-cloud-upload-alt fa-3x"></i></div>
-                       <div class="upload__text">перетащите сюда документы на оплату
-                           <div class="upload__text_clickable"
-                               @click="onUpload">
-                               <em>или нажмите для загрузки</em>
-                            </div>
                        </div>
-                       <div class="upload__tip">допускаются к загрузке фалы картинок и pdf-файлы</div>
-               </div>
-<!--               <partner-form-el-->
-<!--                   v-if="isPartnerFormVisible"-->
-<!--                   ref="partner"-->
-<!--                   :partner="newPartner">-->
-<!--               </partner-form-el>-->
-        </el-drawer>`
+               </div>`
+        // `<el-drawer
+        //         :visible.sync="$parent.isUploadFormShow"
+        //         direction="ltr"
+        //         size="50%">
+        //         <div class="upload-dragger-block"
+        //             @dragover.stop.prevent="onOver"
+        //             @drop.stop.prevent="onBillFileDrop">
+        //                <div class="upload-block__icon"><i class="fas fa-cloud-upload-alt fa-3x"></i></div>
+        //                <div class="upload__text">перетащите сюда документы на оплату
+        //                    <div class="upload__text_clickable"
+        //                        @click="onUpload">
+        //                        <em>или нажмите для загрузки</em>
+        //                     </div>
+        //                </div>
+        //                <div class="upload__tip">допускаются к загрузке фалы картинок и pdf-файлы</div>
+        //        </div>
+        // </el-drawer>`
 });

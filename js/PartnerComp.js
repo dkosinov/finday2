@@ -15,7 +15,8 @@ Vue.component('PartnerComp', {
             this.isPartnerFormVisible = true;
         },
     },
-    template: `<div class="partner-container">
+    template: `<div class="partner-container"
+                    draggable="true">
                 <div class="partner__tips-block">
                     <div class="partner-actions-block">
                         <div class="icon-block"

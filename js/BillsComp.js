@@ -5,6 +5,9 @@ Vue.component('bills-comp',{
             isPartnerBillsInfoVisible: false,
         }
     },
+    filters: {
+
+    },
     methods: {
         handleShowPartnerBills(partner){
             this.isPartnerBillsVisible = true;
@@ -60,24 +63,23 @@ Vue.component('bills-comp',{
             let paidSum = this.billPaymentsSum(bill);
             console.log(`Оплачено по счёту ${paidSum}`);
 
-            return billSum - paidSum;
-        },
-        billsDebtSum(bills){
-            let notPaidBillsSum = bills.reduce((accum, curr)=>{
-                return accum + this.billDebtSum(curr);
-            }, 0);
-            if (notPaidBillsSum < 0){
-                this.$root.notifyWarningMessage(`Остаток к оплате меньше 0: ${notPaidBillsSum}`);
+            let notPaidSum = billSum - paidSum;
+            if (notPaidSum < 0){
+                this.$root.notifyWarningMessage(`Остаток к оплате по счёту меньше 0: ${notPaidSum}`);
             }
-            console.log(`Остаток к оплате по счёту: ${notPaidBillsSum}`);
-            return notPaidBillsSum;
+            return notPaidSum;
+        },
+        billsDebNum_Sum(bills){
+            return [bills.length, bills.reduce((accum, curr)=>{
+                return accum + this.billDebtSum(curr);
+            }, 0)];
         }
     },
     template: `<div class="partner__bills-block">
                 <div class="bills-block__tag"
                     title="Остаток к оплате по контрагенту"
                     @click="isPartnerBillsInfoVisible=!isPartnerBillsInfoVisible">
-                    {{billsDebtSum(bills)}}
+                    {{billsDebNum_Sum(bills)[0]}} : {{$root.getFinData(billsDebNum_Sum(bills)[1])}}
                 </div>
                 <div class="bills-block__items"
                     v-if="isPartnerBillsInfoVisible">
@@ -103,11 +105,12 @@ Vue.component('billEl', {
         },
     },
     template: `<div class="bill-info-container"
-                    title="Остаток к оплате по счёту">
+                    :title="bill.comment"
+                    draggable="true">
                  <div class="bill-info__title"
                     @click="handleShowBillForm()">
                      <i class="far fa-file"></i>
-                     {{$parent.billDebtSum(bill)}}
+                     {{$root.getFinData($parent.billDebtSum(bill))}}
                  </div>
                  <bill-form-el
                     :bill="bill">
@@ -198,7 +201,7 @@ Vue.component('billFormEl',{
                                <el-input v-model="bill.id" autocomplete="off" placeholder="Номер счёта"></el-input>
                             </el-form-item>
                             <el-form-item label="Сумма">
-                               <el-input v-model="bill.sum" autocomplete="off" placeholder="0"></el-input>
+                               <el-input v-model="bill.events[0].sum" autocomplete="off" placeholder="0"></el-input>
                             </el-form-item>
                             <el-form-item label="Дата оплаты по сроку">
                                  <div class="block">
