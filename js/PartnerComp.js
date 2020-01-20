@@ -26,17 +26,17 @@ Vue.component('PartnerComp', {
                         <div class="icon-block"><i class="el-icon-share"></i></div>
                         <div class="icon-block"><i class="el-icon-delete"></i></div>
                     </div>
-                    <bills-comp
-                        :bills="partner.bills"></bills-comp>
                 </div>
                 <div class="partner-block" 
-                    :title="partner.name2"
-                    dragable="true">
+                    :title="partner.name2">
                     {{partnerShortName}}
                 </div>
                 <div class="product-mini__stars stars"
                     v-html="$root.getRatingHTML(partner.rating)">
                 </div>
+                <bills-comp
+                   :bills="partner.bills">
+                </bills-comp>
                 <partner-form-el
                     ref="partner"
                     :partner="partner">

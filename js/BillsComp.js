@@ -77,7 +77,7 @@ Vue.component('bills-comp',{
     },
     template: `<div class="partner__bills-block">
                 <div class="bills-block__tag"
-                    title="Остаток к оплате по контрагенту"
+                    title="Информация о неоплаченных счетах"
                     @click="isPartnerBillsInfoVisible=!isPartnerBillsInfoVisible">
                     {{billsDebNum_Sum(bills)[0]}} : {{$root.getFinData(billsDebNum_Sum(bills)[1])}}
                 </div>
@@ -96,6 +96,7 @@ Vue.component('billEl', {
     props: ['bill'],
     data(){
         return {
+            isBillInfoVisible: false,
             isBillFormVisible: false,
         }
     },
@@ -104,18 +105,53 @@ Vue.component('billEl', {
             this.isBillFormVisible = true;
         },
     },
-    template: `<div class="bill-info-container"
-                    :title="bill.comment"
-                    draggable="true">
-                 <div class="bill-info__title"
-                    @click="handleShowBillForm()">
-                     <i class="far fa-file"></i>
-                     {{$root.getFinData($parent.billDebtSum(bill))}}
-                 </div>
-                 <bill-form-el
-                    :bill="bill">
-                 </bill-form-el>
-             </div>`
+    template: `<div draggable="true"
+                    class="bill-container">
+                    <div class="bill-info__title"
+                       :title="bill.comment"
+                       @click="isBillInfoVisible=!isBillInfoVisible">
+                        <i class="far fa-file"></i>
+                        {{$root.getFinData($parent.billDebtSum(bill))}} : {{bill.events[1].date}}
+                    </div>
+                    <div v-if="isBillInfoVisible">
+                       <bill-info-el
+                           :bill="bill">
+                       </bill-info-el>
+                    </div>
+                    <bill-form-el
+                       :bill="bill">
+                    </bill-form-el>             
+            </div>`
+});
+
+Vue.component('billInfoEl', {
+    props: ['bill'],
+    data(){
+        return {
+            isBillEventsVisible: false,
+            count: 0,
+        }
+    },
+    template: `<div class="bill__info-container">
+                {{bill.id}}<br>
+                {{bill.events.length}}<br>
+                <div class="events-block">
+                    <el-button class="events__btn"
+                        icon="el-icon-date"
+                        size="medium"
+                        type="primary"
+                        @click="isBillEventsVisible=!isBillEventsVisible"
+                        title="Показать/скрыть события">
+                        События
+                    </el-button>                  
+                    <div v-if="isBillEventsVisible"
+                        class="events__content">
+                        <bill-events-comp
+                           :bill-events="bill.events">
+                        </bill-events-comp>                
+                     </div>  
+                </div>            
+            </div>`
 });
 
 Vue.component('billFormEl',{
@@ -145,10 +181,15 @@ Vue.component('billFormEl',{
             },
             loading: false,
             timer: null,
+            isBillEventsVisible: false,
         }
     },
 
     methods: {
+        // handlerShowBillEvents(){
+        //     console.log('События');
+        //     this.isBillEventsVisible = true;
+        // },
         onSubmit() {
             let newBill = Object.assign({},this.newBill);
             // newBill.events[0].date = new Date();
@@ -223,6 +264,7 @@ Vue.component('billFormEl',{
                             <el-form-item>
                             </el-form-item>
                        </el-form>
+<!--                       <button @click="handlerShowBillEvents">События</button>-->
                        <div class="demo-drawer__footer">
                            <el-button type="primary"
                                 @click="$refs.drawer.closeDrawer()"

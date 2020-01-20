@@ -1,8 +1,8 @@
 Vue.component('headerComp', {
     data(){
         return {
-            isUploadFormShow: false,
-            partners: null,
+            // isUploadFormShow: false,
+            // partners: null,
         }
     },
     created: function () {
@@ -15,9 +15,18 @@ Vue.component('headerComp', {
         },
     },
     template: `<header class="header-container">
-                <a href="http://myfinday.online/" class="logo">
-                    <span class="logo__text_1">MY</span><span class="logo__text_2">FIN</span><span class="logo__text_3">DAY</span>                    
-                </a>
+                <div class="logo">
+                    <a href="http://myfinday.online/" class="logo">
+                        <div class="logo__text">
+                            <div class="logo__text_1">myFinday</div><div class="logo__text_2">|счета</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="search__container">
+                    <filter-comp></filter-comp>
+                </div>
+
+                
 <!--                <div class="upload-menu__item"-->
 <!--                    @click="handlerShowUploadForm"-->
 <!--                    title="Загрузите документы">-->

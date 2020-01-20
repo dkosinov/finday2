@@ -3,41 +3,45 @@ Vue.component('BillEventsComp',{
     data(){
         return {
             isEventFormVisible: false,
+            // count: 0,
         }
     },
     methods: {
+        // handlerShowBillEvents(){
+        //     console.log('События');
+        //     this.isBillEventsVisible = true;
+        // },
         handleEventAdd(){
             console.log('add event');
             this.isEventFormVisible = true;
         },
     },
     template: `<div class="block">
-                   <el-event-form
-                        :events="billEvents">
-                   </el-event-form>
-                   <div class="container-flex-row">
-                       <h3>Cобытия</h3>
-                       <el-button
-                           icon="el-icon-date"
-                           size="medium"
-                           type="primary"
-                           @click="handleEventAdd()">
-                           Добавить
-                       </el-button>
-                   </div> 
-                   <el-timeline>
-                     <el-timeline-item
-                       v-for="(event, index) in billEvents"
-                       :key="index"
-                       :type="event.type"
-                       :timestamp="event.date">
-                            {{event.content}}
-                            <el-tag :type="event.type">{{event.sum}}</el-tag>
-                     </el-timeline-item>
-                   </el-timeline>
-               </div>`
+                    <el-event-form
+                         :events="billEvents">
+                    </el-event-form>
+                        <div class="container-flex-row">
+                            <el-button
+                                icon="el-icon-circle-plus-outline"
+                                size="medium"
+                                type="primary"
+                                @click="handleEventAdd()">
+                                Новое
+                            </el-button>
+                        </div>
+                        <el-timeline>
+                          <el-timeline-item
+                            v-for="(event, index) in billEvents"
+                            :key="index"
+                            :type="event.type"
+                            :timestamp="event.date"
+                            placement="top">
+                                 {{event.content}}
+                                 <el-tag :type="event.type">{{event.sum}}</el-tag>
+                          </el-timeline-item>
+                        </el-timeline>
+                </div>`
 });
-
 
 Vue.component('elEventForm',{
     props: ['events'],

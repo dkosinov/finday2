@@ -69,13 +69,18 @@ Vue.component('partnersComp', {
                                 ],
                         },                    ]
                 }           ],
-            search: '',
+            // search: '',
             // isPartnerFormVisible: false,
             // isNewPartnerFormVisible: false,
-            fileList: [],
+            // fileList: [],
+            filtered: [],
         }
     },
     methods: {
+        filter(value){
+            const regexp = new RegExp(value, 'i');
+            this.filtered = this.partnersData.filter(el => regexp.test(el.name1));
+        },
         onOver(evnt){
             evnt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
         },
