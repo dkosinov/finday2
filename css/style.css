@@ -183,6 +183,15 @@ body {
     cursor: pointer;
 }
 
+.bill-container:hover .bill-actions-block {
+    visibility: visible;
+}
+
+.bill-actions-block {
+    display: flex;
+    visibility: hidden;
+}
+
 .bills-block__items {
     /*display: flex;*/
     /*flex-direction: column;*/
@@ -214,6 +223,18 @@ body {
     width: 10px;
     height: 10px;
     background-color: #333333;
+}
+.event__title {
+    display: flex;
+}
+
+.event__container:hover .event__actions {
+    visibility: visible;
+}
+
+.event__actions {
+    display: flex;
+    visibility: hidden;
 }
 
 .dnd-container {
@@ -303,11 +324,12 @@ body {
 
 .icon-block {
     border: solid 1px gray;
+    border-radius: 6px;
     margin: 0 2px -5px;
     z-index: 5;
-    width: 18px;
-    height: 18px;
-    padding: 0px 0 0px 2px;
+    width: 20px;
+    height: 20px;
+    padding: 3px 0 0px 4px;
 }
 
 .icon-block:hover {

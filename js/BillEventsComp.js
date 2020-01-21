@@ -17,9 +17,9 @@ Vue.component('BillEventsComp',{
         },
     },
     template: `<div class="block">
-                    <el-event-form
+                    <event-form-el
                          :events="billEvents">
-                    </el-event-form>
+                    </event-form-el>
                         <div class="container-flex-row">
                             <el-button
                                 icon="el-icon-circle-plus-outline"
@@ -36,14 +36,35 @@ Vue.component('BillEventsComp',{
                             :type="event.type"
                             :timestamp="event.date"
                             placement="top">
-                                 {{event.content}}
-                                 <el-tag :type="event.type">{{event.sum}}</el-tag>
+                            <event-el
+                                :event="event">
+                            </event-el>
                           </el-timeline-item>
                         </el-timeline>
                 </div>`
 });
 
-Vue.component('elEventForm',{
+Vue.component('eventEl', {
+    props: ['event'],
+    template: `<div class="event__container">
+                <div class="event-content">
+                    <div class="event__title">
+                        <p>{{event.title}}</p>
+                        <div class="actions-block event__actions">
+                            <div class="icon-block"
+                                @click="handleShowBillForm">
+                                <i class="el-icon-edit"></i>
+                            </div>
+                            <div class="icon-block"><i class="el-icon-share"></i></div>
+                            <div class="icon-block"><i class="el-icon-delete"></i></div>
+                        </div>                      
+                    </div>
+                    <el-tag :type="event.type">{{$root.getFinData(event.sum)}}</el-tag>                
+                </div>             
+            </div>`
+}),
+
+Vue.component('eventFormEl',{
     props: ['events'],
     data() {
         return {

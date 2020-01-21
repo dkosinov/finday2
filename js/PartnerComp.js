@@ -18,7 +18,7 @@ Vue.component('PartnerComp', {
     template: `<div class="partner-container"
                     draggable="true">
                 <div class="partner__tips-block">
-                    <div class="partner-actions-block">
+                    <div class="actions-block partner-actions-block">
                         <div class="icon-block"
                             @click="handleShowPartnerForm()">
                             <i class="el-icon-edit"></i>

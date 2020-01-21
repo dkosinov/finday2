@@ -107,6 +107,14 @@ Vue.component('billEl', {
     },
     template: `<div draggable="true"
                     class="bill-container">
+                    <div class="actions-block bill-actions-block">
+                        <div class="icon-block"
+                            @click="handleShowBillForm">
+                            <i class="el-icon-edit"></i>
+                        </div>
+                        <div class="icon-block"><i class="el-icon-share"></i></div>
+                        <div class="icon-block"><i class="el-icon-delete"></i></div>
+                    </div>                    
                     <div class="bill-info__title"
                        :title="bill.comment"
                        @click="isBillInfoVisible=!isBillInfoVisible">
