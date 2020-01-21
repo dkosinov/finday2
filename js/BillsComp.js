@@ -116,7 +116,7 @@ Vue.component('billEl', {
                         <div class="icon-block"><i class="el-icon-delete"></i></div>
                     </div>                    
                     <div class="bill-info__title"
-                       :title="bill.comment"
+                       title="Показать/скрыть детали счёта"
                        @click="isBillInfoVisible=!isBillInfoVisible">
                         <i class="far fa-file"></i>
                         {{$root.getFinData($parent.billDebtSum(bill))}} : {{bill.events[1].date}}
@@ -141,16 +141,18 @@ Vue.component('billInfoEl', {
         }
     },
     template: `<div class="bill__info-container">
-                {{bill.id}}<br>
-                {{bill.events.length}}<br>
+                <h4 class="bill__details-text">Счёт номер: {{bill.id}}</h4>
+                <h6 class="bill__details-text">Сумма: {{$root.getFinData(bill.events[0].sum)}}</h6>
+                <h6 class="bill__details-text">Остаток к оплате: {{$root.getFinData($parent.$parent.billDebtSum(bill))}}</h6>
+                <h6 class="bill__details-text">Дедлайн оплаты: {{bill.events[1].date}}</h6>
                 <div class="events-block">
                     <el-button class="events__btn"
                         icon="el-icon-date"
                         size="medium"
                         type="primary"
-                        @click="isBillEventsVisible=!isBillEventsVisible"
+                        @click.stop="isBillEventsVisible=!isBillEventsVisible"
                         title="Показать/скрыть события">
-                        События
+                        События >>
                     </el-button>                  
                     <div v-if="isBillEventsVisible"
                         class="events__content">
@@ -173,8 +175,8 @@ Vue.component('billFormEl',{
                 debt: 0.00,
                 comment: '',
                 events: [
-                    {content: 'Получен счёт', type:'primary ', date:'', sum:0.00},
-                    {content: 'Дедлайн оплаты', type:'warning', date:'', sum:0.00},
+                    {title: 'Получен счёт', type:'primary', date:'', sum:0.00, file:''},
+                    {title: 'Дедлайн оплаты', type:'warning', date:'', sum:0.00, file:''},
                 ],
             },
             newBill: {
@@ -183,8 +185,8 @@ Vue.component('billFormEl',{
                 debt: 0.00,
                 comment: '',
                 events: [
-                    {content: 'Получен счёт', type:'primary ', date:'', sum:0.00},
-                    {content: 'Дедлайн оплаты', type:'warning', date:'', sum:0.00},
+                    {title: 'Получен счёт', type:'primary', date:'', sum:0.00, file:''},
+                    {title: 'Дедлайн оплаты', type:'warning', date:'', sum:0.00, file:''},
                 ],
             },
             loading: false,
@@ -249,27 +251,8 @@ Vue.component('billFormEl',{
                             <el-form-item label="Номер счёта">
                                <el-input v-model="bill.id" autocomplete="off" placeholder="Номер счёта"></el-input>
                             </el-form-item>
-                            <el-form-item label="Сумма">
-                               <el-input v-model="bill.events[0].sum" autocomplete="off" placeholder="0"></el-input>
-                            </el-form-item>
-                            <el-form-item label="Дата оплаты по сроку">
-                                 <div class="block">
-<!--                                  <span class="demonstration"></span>-->
-                                  <el-date-picker
-                                    v-model="bill.events[1].date"
-                                    type="date"
-                                    placeholder="Виберите дату">
-                                  </el-date-picker>
-                                </div>
-                            </el-form-item>
-                            <el-form-item label="Долг">
-                               <el-input :value="$parent.$parent.billDebtSum(bill)"
-                                    :disabled="true"></el-input>
-                            </el-form-item>
                             <el-form-item label="Комментарий">
                                <el-input type="textarea" v-model="bill.comment"></el-input>
-                            </el-form-item>
-                            <el-form-item>
                             </el-form-item>
                        </el-form>
 <!--                       <button @click="handlerShowBillEvents">События</button>-->

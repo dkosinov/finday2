@@ -22,10 +22,7 @@ Vue.component('headerComp', {
                         </div>
                     </a>
                 </div>
-                <div class="search__container">
-                    <filter-comp></filter-comp>
-                </div>
-
+                <search-comp></search-comp>
                 
 <!--                <div class="upload-menu__item"-->
 <!--                    @click="handlerShowUploadForm"-->

@@ -17,14 +17,14 @@ Vue.component('partnersComp', {
                             events:
                                 [
                                     {id: 1, name: 'start', title: 'Получен счёт', type:'primary', date:'2019-11-01', sum:1500000},
+                                    {id: 1, name: 'payment', title: 'Оплата', type:'success', date:'2020-01-15', sum:500000},
                                     {id: 1, name: 'deadline', title: 'Дедлайн оплаты', type:'warning', date:'2019-11-15', sum:1000000},
                                     {id: 1, name: 'payment', title: 'Оплата', type:'success', date:'2019-11-15', sum:500000},
+                                    {id: 1, name: 'payment', title: 'Оплата', type:'success', date:'2019-12-29', sum:100000},
                                     {id: 1, name: 'user', title: 'Котрагентом подано исковое заявление', type:'info', date:'2019-12-15', sum:500000},
                                     {id: 1, name: 'deadline',title: 'Дедлайн оплаты', type:'warning', date:'2019-12-30', sum:500000},
-                                    {id: 1, name: 'payment', title: 'Оплата', type:'success', date:'2019-12-29', sum:100000},
                                     {id: 1, name: 'user', title: 'Обязательный платёж по договорённости', type:'danger', date:'2020-01-10', sum:100000},
                                     {id: 1, name: 'payment', title: 'Оплата', type:'success', date:'2020-01-10', sum:100000},
-                                    {id: 1, name: 'payment', title: 'Оплата', type:'success', date:'2020-01-15', sum:500000},
                                     {id: 1, name: 'paid', title: 'Счёт полностью оплачен', type:'primary', date:'2020-01-15', sum:1000000}
                                 ],
                         },

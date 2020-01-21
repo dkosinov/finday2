@@ -166,7 +166,8 @@ body {
     border-radius: 10px;
     color: #DB4437;
     display: inline-block;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 300;
     /*line-height: 14px;*/
     padding: 2px 6px;
     text-align: center;
@@ -203,6 +204,10 @@ body {
     /*top: 0px;*/
     display: flex;
     flex-direction: column;
+}
+
+.bill__details-text {
+    margin: 2px;
 }
 
 .events-block {
@@ -377,6 +382,30 @@ body {
 }
 
 /*Классы для элемента поиска в заголовке*/
+.search__container:hover .search-field{
+    border-bottom: 2px solid #4285f4;
+}
+.search__container:hover .btn-search{
+    color: #4285f4;
+}
+.search-form{
+    position: relative;
+    margin-right: 50px;
+    display: inline-block;
+}
+
+.search-field:focus{
+    outline: none;
+}
+.search-field {
+    box-sizing: border-box;
+    width: 200px;
+    color: #000000;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #fafafa;
+}
 
 .btn-search {
     background-color: transparent;
@@ -386,23 +415,6 @@ body {
     position: absolute;
     bottom: 5px;
     right: 0;
-}
-.search-form{
-    position: relative;
-    margin-right: 50px;
-    display: inline-block;
-}
-.search-field:focus{
-    outline: none;
-}
-.search-field {
-    box-sizing: border-box;
-    width: 200px;
-    color: #fafafa;
-    padding: 10px;
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid #fafafa;
 }
 
 /***********************/

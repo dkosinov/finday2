@@ -35,19 +35,40 @@ const app = new Vue({
                 return (a[prop] - b[prop]);
             })
         },
+        // sortedEventsByDate(events) {
+        //     if (events.length) {
+        //         function compare(a, b) {
+        //             console.log(`a.date = ${a.date}`);
+        //             console.log(`b.date = ${b.date}`);
+        //             if (a.date < b.date)
+        //                 return -1;
+        //             if (a.date > b.date)
+        //                 return 1;
+        //             return 0;
+        //         }
+        //         return events.sort(compare);
+        //     }
+        // },
+
         notifySuccessMessage(msg){
-            this.$notify.success({
-                title: 'Success',
+            this.$message({
+                showClose: true,
+                type: 'success',
                 message: msg,
-                offset: 100,
             });
         },
         notifyWarningMessage(msg){
-            this.$notify({
-                title: 'Warning',
-                message: msg,
+            this.$message({
+                showClose: true,
                 type: 'warning',
-                offset: 100,
+                message: msg,
+            });
+        },
+        notifyErrorMessage(msg){
+            this.$message({
+                showClose: true,
+                type: 'error',
+                message: msg,
             });
         },
         getRatingHTML(rating) {
