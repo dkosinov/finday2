@@ -27,11 +27,8 @@ const app = new Vue({
                 return data.toFixed(2);
             }
         },
-        getEventDate(d){
-            console.log(d);
-            let date = new Date(d);
-            console.log(date);
-            return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        getEventData(data){
+            return `${data.getFullYear()}-${data.getMonth()+1}-${data.getDate()}`;
         },
         sortObjsArrByNumberProp(arr, prop){
             return arr.sort((a, b) => {
