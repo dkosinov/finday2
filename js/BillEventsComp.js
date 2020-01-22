@@ -10,6 +10,7 @@ Vue.component('BillEventsComp',{
                 date:'',
                 sum:null
             },
+            isEventFormVisible: false,
         }
     },
     computed: {
@@ -27,6 +28,7 @@ Vue.component('BillEventsComp',{
                 return this.billEvents.sort(compare);
             }
         },
+
     },
     methods: {
         // handlerShowBillEvents(){
@@ -36,6 +38,9 @@ Vue.component('BillEventsComp',{
         handleNewEventAdd(){
             console.log('add event');
             this.isEventFormVisible = true;
+        },
+        eventDate(date) {
+            return this.$root.getEventDate(date)
         },
     },
     template: `<div class="block">
@@ -47,7 +52,7 @@ Vue.component('BillEventsComp',{
                             icon="el-icon-circle-plus-outline"
                             size="medium"
                             type="success"
-                            @click.stop="handleNewEventAdd()"
+                            @click="handleNewEventAdd()"
                             title="Создать новое событие">
                             Новое
                         </el-button>
@@ -113,13 +118,9 @@ Vue.component('eventFormEl',{
                 date:'',
                 sum:null
             },
-            // newEvent: {
-            //     id: 0,
-            //     name: '',
-            //     title: '',
-            //     type:'info',
-            //     date:'',
-            //     sum:null},
+
+            formEvent: null,
+
             selectEvents: [
                 {id: 1, name: 'start', title: 'Получен счёт', type:'primary', date:'', sum:0.00, file:''},
                 {id: 2, name: 'deadline',title: 'Дедлайн оплаты', type:'warning', date:'', sum:0.00, file:''},
@@ -127,18 +128,38 @@ Vue.component('eventFormEl',{
         }
     },
 
+    created: function () {
+        this.formEvent = Object.assign({},this.event);
+        console.log(this.formEvent);
+    },
+
     methods: {
         onSubmit() {
-            if (this.event.id) {
+            if (!this.event.id) {
+                console.log(this.event.id);
                 console.log('Новое событие');
                 let newEvent = Object.assign({},this.event);
-                newEvent.date = this.$root.getEventData(newEvent.date);
+                newEvent.date = this.$root.getEventDate(newEvent.date);
                 this.$parent.billEvents.push(newEvent);
                 for (let key in this.emptyEvent) {
-                    this.event[key] = this.emptyEvent[key];
+                    if (key === 'sum') {
+                        this.event[key] = +this.emptyEvent[key];
+                    } else {
+                        this.event[key] = this.emptyEvent[key];
+                    }
                 }
             } else {
                 console.log('Редактируем имеющееся событие');
+                console.log(this.event.id);
+                for (let key in this.formEvent) {
+                    if (key === 'sum') {
+                        this.event[key] = +this.formEvent[key];
+                    } else if (key === 'date') {
+                        this.event[key] = this.$root.getEventDate(this.formEvent[key]);
+                    } else {
+                        this.event[key] = this.formEvent[key];
+                    }
+                }
             }
             console.log('submit!');
             this.$parent.isEventFormVisible = false;
@@ -150,15 +171,15 @@ Vue.component('eventFormEl',{
                     <div style="padding: 20px">
                        <el-form ref="newEvent" :model="event">
                             <el-form-item label="Название события">
-                               <el-input v-model="event.title" autocomplete="off"></el-input>
+                               <el-input v-model="formEvent.title" autocomplete="off" placeholder="Новое событие"></el-input>
                             </el-form-item>
                             <el-form-item label="Сумма">
-                               <el-input v-model="event.sum" autocomplete="off" placeholder="0"></el-input>
+                               <el-input v-model="formEvent.sum" autocomplete="off" placeholder="0"></el-input>
                             </el-form-item>
                             <el-form-item label="Дата">
                                  <div class="block">
                                   <el-date-picker
-                                    v-model="event.date"
+                                    v-model="formEvent.date"
                                     type="date"
                                     placeholder="Выберите дату">
                                   </el-date-picker>
